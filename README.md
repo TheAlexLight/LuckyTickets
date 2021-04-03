@@ -1,0 +1,2 @@
+# LuckyTickets
+Count lucky tickets
