@@ -10,8 +10,6 @@ namespace _6.LuckyTickets.Logic
     {
         public override int GetTicketsCount(int startRange, int finishRange)
         {
-            numbersInTicket = 6;
-
             for (int i = startRange; i <= finishRange; i++)
             {
                 int evenNumberSumCount = 0;

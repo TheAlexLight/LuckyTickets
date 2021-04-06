@@ -12,34 +12,35 @@ namespace _6.LuckyTickets.Controller
 {
     class LuckyTicketController
     {
-        ConsolePrinter _printer = new ConsolePrinter();
-        Validator _validData = new Validator();
+        readonly ConsolePrinter _printer = new ConsolePrinter();
+        readonly Validator _validData = new Validator();
 
-        public void ChooseTicketMode(string modeName, string startRange, string finishRange)
+        public void ChooseTicketMode(string modeName, string lowestBorder, string highestBorder)
         {
             try
             {
-                modeName = CheckStartString(modeName, Constant.MODE);
-
-                int lowerBound = CheckStartNumbers(startRange, Constant.LOWER_BOUND);
-                int higherBound = CheckStartNumbers(finishRange, Constant.HIGHER_BOUND);
+                int lowestBound = CheckStartNumbers(lowestBorder);
+                int highestBound = CheckStartNumbers(highestBorder);
 
                 int ticketCount = 0;
 
-                if (true)//TODO add border comparison)
+                if (!_validData.HighestBorderGreater(lowestBound,highestBound))
                 {
-
+                    _printer.WriteLine(Constant.HIGHEST_BORDER_SHOULD_BE_GREATER);
+                    _printer.ShowInstruction(Constant.INSTRUCTION, Constant.FIRST_ARGUMENT, Constant.SECOND_ARGUMENT, Constant.THIRD_ARGUMENT);
+                    Environment.Exit(-1);
                 }
+
+                LuckyTicket ticket = null;
 
                 if (modeName.ToUpper().Equals(Constant.MOSCOW))
                 {
-                    MoscowLuckyTicket moscowTicket = new MoscowLuckyTicket();
-                    ticketCount= moscowTicket.GetTicketsCount(lowerBound, higherBound);
+                    ticket = new MoscowLuckyTicket();
+                    
                 }
                 else if (modeName.ToUpper().Equals(Constant.PITER))
                 {
-                    PiterLuckyTicket piterTicket = new PiterLuckyTicket();
-                    ticketCount = piterTicket.GetTicketsCount(lowerBound,higherBound);
+                    ticket = new PiterLuckyTicket();
                 }
                 else
                 {
@@ -47,6 +48,8 @@ namespace _6.LuckyTickets.Controller
                     _printer.ShowInstruction(Constant.INSTRUCTION, Constant.FIRST_ARGUMENT, Constant.SECOND_ARGUMENT, Constant.THIRD_ARGUMENT);
                     Environment.Exit(-1);
                 }
+
+                ticketCount = ticket.GetTicketsCount(lowestBound, highestBound);
 
                 _printer.WriteLine(string.Format(Constant.TICKET_AMOUNT, ticketCount));
 
@@ -58,19 +61,7 @@ namespace _6.LuckyTickets.Controller
             }
         }
 
-        public string CheckStartString(string checkedString, string checkedStringName)
-        {
-            if (!_validData.CheckStringLength(checkedString))
-            {
-                _printer.WriteLine(string.Format(Constant.WRONG_STRING, checkedStringName));
-                _printer.ShowInstruction(Constant.INSTRUCTION, Constant.FIRST_ARGUMENT, Constant.SECOND_ARGUMENT, Constant.THIRD_ARGUMENT);
-                Environment.Exit(-1);
-            }
-
-            return checkedString;
-        }
-
-        public int CheckStartNumbers(string checkedNumber, string checkedStringName)
+        public int CheckStartNumbers(string checkedNumber)
         {
             Converter converterArgs = new Converter();
 

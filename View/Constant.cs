@@ -12,7 +12,6 @@ namespace _6.LuckyTickets.View
         public const int MAX_TICKET_BORDER = 1000000;
 
         public const string EXCEPTION_OCCURED = "ERROR occured";
-        public const string MODE = "Mode";
         public const string WRONG_STRING = "Wrong {0}";
         public const string INSTRUCTION = "Instruction of using: You should use 3 arguments::";
         public const string FIRST_ARGUMENT =@"1 argument - choose your mode(""Moscow"" or ""PITER""): Type - string";
@@ -22,10 +21,9 @@ namespace _6.LuckyTickets.View
         public const string PITER = "PITER";
         public const string WRONG_BOUNDARIES = "Wrong number boundaries, try again";
         public const string INT_WRONG_TYPE = "Type of data should be integer, try again";
-        public const string LOWER_BOUND = "Lower bound";
-        public const string HIGHER_BOUND = "Higher bound";
         public const string TICKET_AMOUNT = "Ticket amount = {0}";
         public const string WRONG_MODE = "Wrong mode. Mode should be Moscow or Piter";
+        public const string HIGHEST_BORDER_SHOULD_BE_GREATER = "Wrong numbers. Highest border should be greater than lowest";
 
     }
 }

@@ -9,7 +9,7 @@ namespace _6.LuckyTickets
     public abstract class LuckyTicket
     {
         protected int amount = 0;
-        protected int numbersInTicket;
+        protected int numbersInTicket = 6;
 
         public abstract int GetTicketsCount(int startRange, int finishRange);
     }
